@@ -4,7 +4,7 @@ using GeekShop.api.Model;
 using GeekShop.api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GeekShop.api
+namespace GeekShop.api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
@@ -20,7 +20,7 @@ namespace GeekShop.api
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductDTO>> Create([FromBody]ProductDTO product)
+        public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductDTO product)
         {
 
             if (product == null)
