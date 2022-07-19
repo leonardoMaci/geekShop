@@ -2,7 +2,7 @@
 
 namespace GeekShop.web.Services
 {
-    public interface IProductServices
+    public interface IProductService
     {
         Task<Product> CreateProduct(Product product);
         Task<bool> DeleteProduct(long id);
