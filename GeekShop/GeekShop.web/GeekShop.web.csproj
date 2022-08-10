@@ -10,4 +10,8 @@
     <ProjectReference Include="..\GeekShop.api\GeekShop.api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Product\" />
+  </ItemGroup>
+
 </Project>

@@ -9,6 +9,7 @@ namespace GeekShop.web.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public CategoryEnum Category { get; set; }
+        public string CategoryName => Enum.GetName(typeof(CategoryEnum), Category);
         public string Image_Url { get; set; }
     }
 }

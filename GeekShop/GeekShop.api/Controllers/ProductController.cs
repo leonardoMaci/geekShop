@@ -31,7 +31,7 @@ namespace GeekShop.api.Controllers
             return Ok(productResponse);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(long id)
         {
             var state = await _productRepository.Delete(id);
@@ -60,7 +60,7 @@ namespace GeekShop.api.Controllers
             return Ok(products);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> FindById(long id)
         {
             var product = await _productRepository.FindById(id);

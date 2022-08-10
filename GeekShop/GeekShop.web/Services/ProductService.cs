@@ -6,7 +6,7 @@ namespace GeekShop.web.Services
     public class ProductService : IProductService
     {
         private readonly HttpClient _client;
-        public const string BasePath = "api/v1/product";
+        public const string BasePath = "api/v1/Product";
 
         public ProductService(HttpClient client)
         {
@@ -41,7 +41,7 @@ namespace GeekShop.web.Services
 
         public async Task<Product> FindByIdProduct(long id)
         {
-            var response = await _client.DeleteAsync($"{BasePath}/{id}");
+            var response = await _client.GetAsync($"{BasePath}/{id}");
             return await response.ReadContentAs<Product>();
         }
 
