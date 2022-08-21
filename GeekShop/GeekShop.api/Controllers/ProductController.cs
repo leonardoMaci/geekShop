@@ -2,6 +2,7 @@
 using GeekShop.api.Data.DTOs;
 using GeekShop.api.Model;
 using GeekShop.api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekShop.api.Controllers
@@ -19,6 +20,7 @@ namespace GeekShop.api.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductDTO product)
         {
@@ -31,6 +33,7 @@ namespace GeekShop.api.Controllers
             return Ok(productResponse);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(long id)
         {
@@ -41,6 +44,7 @@ namespace GeekShop.api.Controllers
             return Ok(state);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult<ProductDTO>> Update([FromBody] ProductDTO product)
         {
@@ -53,6 +57,7 @@ namespace GeekShop.api.Controllers
             return Ok(productResponse);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> FindAll()
         {
@@ -60,6 +65,7 @@ namespace GeekShop.api.Controllers
             return Ok(products);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> FindById(long id)
         {
