@@ -2,6 +2,7 @@
 using GeekShop.api.Data.DTOs;
 using GeekShop.api.Model;
 using GeekShop.api.Repository;
+using GeekShop.api.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,7 +58,6 @@ namespace GeekShop.api.Controllers
             return Ok(productResponse);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> FindAll()
         {
@@ -65,7 +65,7 @@ namespace GeekShop.api.Controllers
             return Ok(products);
         }
 
-        [Authorize]
+        [Authorize(Roles = Role.Client)]
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> FindById(long id)
         {

@@ -16,6 +16,7 @@ namespace GeekShop.web.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
+        [Authorize]
         public async Task<ActionResult> ProductIndex()
         {
             var token = await HttpContext.GetTokenAsync("access_token");
@@ -55,7 +56,7 @@ namespace GeekShop.web.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles = Role.Admin)]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> ProductUpdate(Product product)
         {
