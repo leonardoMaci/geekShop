@@ -1,4 +1,5 @@
-﻿using GeekShop.web.Models.Commun;
+﻿using GeekShop.web.Models;
+using GeekShop.web.Models.Commun;
 using GeekShop.web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -11,11 +12,13 @@ namespace GeekShop.web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -30,6 +33,40 @@ namespace GeekShop.web.Controllers
             var token = await HttpContext.GetTokenAsync("access_token");
             var model = await _productService.FindByIdProduct(id, token);
             return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        [Authorize]
+        public async Task<IActionResult> DetailsPost(Product product)
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+
+            Cart cart = new()
+            {
+                CartHeader = new CartHeader
+                {
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+                }
+            };
+
+            CartDetail cartDetail = new CartDetail()
+            {
+                Count = product.Count,
+                ProductId = product.ID,
+                Product = await _productService.FindByIdProduct(product.ID, token)
+            };
+
+            List<CartDetail> cartDetails = new List<CartDetail>();
+            cartDetails.Add(cartDetail);
+            cart.CartDetails = cartDetails;
+
+            var response = await _cartService.AddItemToCart(cart, token);
+            if (response != null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
         }
 
         public IActionResult Privacy()

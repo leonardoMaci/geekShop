@@ -12,7 +12,7 @@ namespace GeekShop.web.Models
         public string CategoryName => Enum.GetName(typeof(CategoryEnum), Category);
         public string Image_Url { get; set; }
         public int Count { get; set; }
-        public string SubstringName => NM_Product.Length < 24 ? NM_Product : $"{NM_Product.Substring(0, 21)} ...";
-        public string SubstringDescription => Description.Length < 355 ? NM_Product : $"{Description.Substring(0, 352)} ...";
+        public string SubstringName => string.IsNullOrEmpty(NM_Product) ? "" : NM_Product.Length < 24 ? NM_Product : $"{NM_Product.Substring(0, 21)} ...";
+        public string SubstringDescription => string.IsNullOrEmpty(Description) ? "" : Description.Length < 355 ? NM_Product : $"{Description.Substring(0, 352)} ...";
     }
 }
