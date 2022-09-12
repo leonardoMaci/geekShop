@@ -122,7 +122,7 @@ namespace GeekShop.CartAPI.Repository
                 if (cartDetail == null)
                 {
                     //Create CartDetails
-                    cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.ID;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.ID;
                     cart.CartDetails.FirstOrDefault().Product = null;
                     _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                     await _context.SaveChangesAsync();

@@ -7,7 +7,7 @@ namespace GeekShop.web.Services
     public class CartService : ICartService
     {
         private readonly HttpClient _client;
-        public const string BasePath = "api/v1/Cart";
+        public const string BasePath = "api/v1/cart";
 
         public CartService(HttpClient client)
         {
