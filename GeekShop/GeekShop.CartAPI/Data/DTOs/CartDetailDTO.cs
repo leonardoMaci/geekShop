@@ -2,6 +2,7 @@
 {
     public class CartDetailDTO
     {
+        public long Id { get; set; }
         public long CartHeaderId { get; set; }
 
         public virtual CartHeaderDTO? CartHeader { get; set; }
