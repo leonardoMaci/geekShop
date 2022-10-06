@@ -11,6 +11,6 @@ namespace GeekShop.web.Services
         Task<bool> ApplyCoupon(Cart model, string token);
         Task<bool> RemoveCoupon(string userId, string token);
         Task<bool> ClearCart(string userId, string token);
-        Task<CartHeader> Checkout(CartHeader cartHeader, string token);
+        Task<object> Checkout(CartHeader cartHeader, string token);
     }
 }
